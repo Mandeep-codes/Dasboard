@@ -50,7 +50,7 @@ const mockIssues: Issue[] = [
     category: 'pothole',
     priority: 'urgent',
     status: 'new',
-    location: { lat: 40.7128, lng: -74.0060, address: '123 Main Street, City, ST 12345' },
+    location: { lat: 28.6139, lng: 77.2090, address: 'Connaught Place, New Delhi, Delhi 110001' },
     department: 'Public Works',
     submittedBy: 'John Smith',
     submittedAt: '2025-01-13T08:30:00Z',
@@ -63,7 +63,7 @@ const mockIssues: Issue[] = [
     category: 'streetlight',
     priority: 'high',
     status: 'assigned',
-    location: { lat: 40.7130, lng: -74.0065, address: '456 Oak Avenue, City, ST 12345' },
+    location: { lat: 19.0760, lng: 72.8777, address: 'Marine Drive, Mumbai, Maharashtra 400020' },
     department: 'Electrical',
     submittedBy: 'Mary Johnson',
     submittedAt: '2025-01-12T14:15:00Z',
@@ -78,12 +78,40 @@ const mockIssues: Issue[] = [
     category: 'trash',
     priority: 'medium',
     status: 'in-progress',
-    location: { lat: 40.7125, lng: -74.0055, address: '789 Park Drive, City, ST 12345' },
+    location: { lat: 13.0827, lng: 80.2707, address: 'Marina Beach, Chennai, Tamil Nadu 600013' },
     department: 'Sanitation',
     submittedBy: 'Robert Davis',
     submittedAt: '2025-01-11T10:45:00Z',
     assignedTo: 'Sarah Brown',
     photos: ['https://images.pexels.com/photos/1105766/pexels-photo-1105766.jpeg']
+  },
+  {
+    id: '4',
+    title: 'Road construction debris',
+    description: 'Construction materials blocking pedestrian walkway near metro station.',
+    category: 'other',
+    priority: 'high',
+    status: 'new',
+    location: { lat: 12.9716, lng: 77.5946, address: 'MG Road, Bangalore, Karnataka 560001' },
+    department: 'Public Works',
+    submittedBy: 'Priya Sharma',
+    submittedAt: '2025-01-13T11:20:00Z',
+    photos: ['https://images.pexels.com/photos/1105766/pexels-photo-1105766.jpeg']
+  },
+  {
+    id: '5',
+    title: 'Water logging after rain',
+    description: 'Severe water logging making roads impassable during monsoon.',
+    category: 'other',
+    priority: 'urgent',
+    status: 'assigned',
+    location: { lat: 22.5726, lng: 88.3639, address: 'Park Street, Kolkata, West Bengal 700016' },
+    department: 'Water Management',
+    submittedBy: 'Amit Kumar',
+    submittedAt: '2025-01-12T16:45:00Z',
+    assignedTo: 'Rajesh Gupta',
+    photos: ['https://images.pexels.com/photos/1105766/pexels-photo-1105766.jpeg'],
+    estimatedCompletion: '2025-01-16T12:00:00Z'
   }
 ];
 
@@ -138,11 +166,17 @@ function App() {
                 <Menu className="h-5 w-5" />
               </button>
               <div>
-                <h1 className="text-2xl font-bold text-gray-900">
-                  {currentView === 'dashboard' && 'Dashboard'}
-                  {currentView === 'issues' && 'Issues Management'}
-                  {currentView === 'analytics' && 'Analytics'}
-                </h1>
+                <div className="flex items-center space-x-3 mb-1">
+                  <h1 className="text-2xl font-bold text-gray-900">
+                    {currentView === 'dashboard' && 'Dashboard'}
+                    {currentView === 'issues' && 'Issues Management'}
+                    {currentView === 'analytics' && 'Analytics'}
+                  </h1>
+                  <div className="hidden sm:flex items-center space-x-2 px-3 py-1 bg-blue-50 rounded-full">
+                    <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                    <span className="text-sm text-blue-700 font-medium">Welcome back, Admin</span>
+                  </div>
+                </div>
                 <p className="text-sm text-gray-600">
                   {currentView === 'dashboard' && 'Real-time overview of civic issues'}
                   {currentView === 'issues' && 'Manage and track all reported issues'}
@@ -151,6 +185,11 @@ function App() {
               </div>
             </div>
             <div className="flex items-center space-x-4">
+              {/* Mobile Welcome Message */}
+              <div className="sm:hidden flex items-center space-x-2 px-2 py-1 bg-blue-50 rounded-full">
+                <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                <span className="text-xs text-blue-700 font-medium">Admin</span>
+              </div>
               <button className="relative p-2 text-gray-500 hover:text-gray-700">
                 <Bell className="h-5 w-5" />
                 <span className="absolute -top-1 -right-1 h-4 w-4 bg-red-500 text-white rounded-full text-xs flex items-center justify-center">
