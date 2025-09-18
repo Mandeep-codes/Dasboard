@@ -103,16 +103,16 @@ const IssueDetails: React.FC<IssueDetailsProps> = ({ issue, onClose }) => {
         <div className="fixed inset-0 bg-black bg-opacity-50 transition-opacity" onClick={onClose} />
 
         {/* Modal */}
-        <div className="relative inline-block w-full max-w-4xl transform overflow-hidden rounded-lg bg-white text-left align-bottom shadow-xl transition-all sm:my-8 sm:align-middle">
+        <div className="relative inline-block w-full max-w-5xl transform overflow-hidden rounded-2xl bg-white text-left align-bottom shadow-2xl transition-all sm:my-8 sm:align-middle">
           {/* Header */}
-          <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200">
+          <div className="flex items-center justify-between px-6 py-5 border-b border-gray-100 bg-gradient-to-r from-gray-50/50 to-gray-100/30">
             <div>
-              <h2 className="text-xl font-semibold text-gray-900">{issue.title}</h2>
-              <p className="text-sm text-gray-600">Issue #{issue.id}</p>
+              <h2 className="text-xl font-bold text-gray-900">{issue.title}</h2>
+              <p className="text-sm text-gray-500 mt-1">Issue #{issue.id}</p>
             </div>
             <button
               onClick={onClose}
-              className="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg"
+              className="p-2.5 text-gray-400 hover:text-gray-600 hover:bg-gray-100/80 rounded-xl transition-all duration-200"
             >
               <X className="h-5 w-5" />
             </button>
@@ -120,14 +120,14 @@ const IssueDetails: React.FC<IssueDetailsProps> = ({ issue, onClose }) => {
 
           <div className="flex h-[600px]">
             {/* Main Content */}
-            <div className="flex-1 p-6 space-y-6 overflow-y-auto">
+            <div className="flex-1 p-6 space-y-6 overflow-y-auto bg-gray-50/30">
               {/* Status and Priority */}
               <div className="flex items-center space-x-4">
-                <span className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${getStatusColor(status)}`}>
+                <span className={`inline-flex items-center px-4 py-2 rounded-full text-sm font-semibold shadow-sm ${getStatusColor(status)}`}>
                   {getStatusIcon(status)}
                   <span className="ml-2 capitalize">{status.replace('-', ' ')}</span>
                 </span>
-                <span className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium border ${getPriorityColor(issue.priority)}`}>
+                <span className={`inline-flex items-center px-4 py-2 rounded-full text-sm font-semibold border shadow-sm ${getPriorityColor(issue.priority)}`}>
                   {issue.priority === 'urgent' && <AlertTriangle className="w-4 h-4 mr-1" />}
                   {issue.priority} Priority
                 </span>
@@ -135,14 +135,14 @@ const IssueDetails: React.FC<IssueDetailsProps> = ({ issue, onClose }) => {
 
               {/* Description */}
               <div>
-                <h3 className="text-sm font-medium text-gray-700 mb-2">Description</h3>
-                <p className="text-gray-900 bg-gray-50 rounded-lg p-4">{issue.description}</p>
+                <h3 className="text-sm font-semibold text-gray-700 mb-3">Description</h3>
+                <p className="text-gray-900 bg-white rounded-xl p-4 border border-gray-200/50 leading-relaxed">{issue.description}</p>
               </div>
 
               {/* Location and Details */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <h3 className="text-sm font-medium text-gray-700 mb-3">Location</h3>
+                  <h3 className="text-sm font-semibold text-gray-700 mb-3">Location</h3>
                   <div className="flex items-start space-x-2 text-sm text-gray-600">
                     <MapPin className="h-4 w-4 mt-0.5 text-gray-400" />
                     <span>{issue.location.address}</span>
@@ -150,12 +150,12 @@ const IssueDetails: React.FC<IssueDetailsProps> = ({ issue, onClose }) => {
                 </div>
                 
                 <div>
-                  <h3 className="text-sm font-medium text-gray-700 mb-3">Details</h3>
+                  <h3 className="text-sm font-semibold text-gray-700 mb-3">Details</h3>
                   <div className="space-y-2 text-sm">
                     <div className="flex items-center space-x-2">
                       <User className="h-4 w-4 text-gray-400" />
                       <span className="text-gray-600">Department:</span>
-                      <span className="font-medium">{issue.department}</span>
+                      <span className="font-semibold">{issue.department}</span>
                     </div>
                     <div className="flex items-center space-x-2">
                       <Clock className="h-4 w-4 text-gray-400" />
@@ -174,7 +174,7 @@ const IssueDetails: React.FC<IssueDetailsProps> = ({ issue, onClose }) => {
               {/* Photos */}
               {issue.photos.length > 0 && (
                 <div>
-                  <h3 className="text-sm font-medium text-gray-700 mb-3 flex items-center">
+                  <h3 className="text-sm font-semibold text-gray-700 mb-3 flex items-center">
                     <Camera className="h-4 w-4 mr-2" />
                     Photos ({issue.photos.length})
                   </h3>
@@ -184,9 +184,9 @@ const IssueDetails: React.FC<IssueDetailsProps> = ({ issue, onClose }) => {
                         <img
                           src={photo}
                           alt={`Issue photo ${index + 1}`}
-                          className="w-full h-32 object-cover rounded-lg border border-gray-200"
+                          className="w-full h-32 object-cover rounded-xl border border-gray-200/50 shadow-sm"
                         />
-                        <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all rounded-lg flex items-center justify-center">
+                        <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all rounded-xl flex items-center justify-center">
                           <span className="text-white opacity-0 group-hover:opacity-100 text-sm">Click to enlarge</span>
                         </div>
                       </div>
@@ -197,7 +197,7 @@ const IssueDetails: React.FC<IssueDetailsProps> = ({ issue, onClose }) => {
 
               {/* Comments/Activity */}
               <div>
-                <h3 className="text-sm font-medium text-gray-700 mb-4 flex items-center">
+                <h3 className="text-sm font-semibold text-gray-700 mb-4 flex items-center">
                   <MessageSquare className="h-4 w-4 mr-2" />
                   Activity & Comments
                 </h3>
@@ -205,13 +205,13 @@ const IssueDetails: React.FC<IssueDetailsProps> = ({ issue, onClose }) => {
                   {mockComments.map((comment) => (
                     <div key={comment.id} className="flex space-x-3">
                       <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-medium ${
-                        comment.type === 'system' ? 'bg-gray-100 text-gray-600' : 'bg-blue-100 text-blue-600'
+                        comment.type === 'system' ? 'bg-gray-100 text-gray-600' : 'bg-gradient-to-br from-blue-100 to-indigo-100 text-blue-700'
                       }`}>
                         {comment.type === 'system' ? 'S' : comment.author.charAt(0)}
                       </div>
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center space-x-2">
-                          <span className="text-sm font-medium text-gray-900">{comment.author}</span>
+                          <span className="text-sm font-semibold text-gray-900">{comment.author}</span>
                           <span className="text-xs text-gray-500">{formatDate(comment.timestamp)}</span>
                         </div>
                         <p className="text-sm text-gray-600 mt-1">{comment.message}</p>
@@ -221,7 +221,7 @@ const IssueDetails: React.FC<IssueDetailsProps> = ({ issue, onClose }) => {
                 </div>
 
                 {/* Add Comment */}
-                <div className="mt-4 pt-4 border-t border-gray-200">
+                <div className="mt-6 pt-4 border-t border-gray-200">
                   <div className="flex space-x-3">
                     <div className="flex-1">
                       <textarea
@@ -229,12 +229,12 @@ const IssueDetails: React.FC<IssueDetailsProps> = ({ issue, onClose }) => {
                         onChange={(e) => setNewComment(e.target.value)}
                         placeholder="Add a comment or update..."
                         rows={3}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg resize-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className="w-full px-4 py-3 border border-gray-200 rounded-xl resize-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white transition-all duration-200"
                       />
                     </div>
                   </div>
                   <div className="flex justify-end mt-2">
-                    <button className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 text-sm">
+                    <button className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl hover:from-blue-700 hover:to-indigo-700 text-sm font-medium shadow-sm transition-all duration-200">
                       <Send className="h-4 w-4 mr-2" />
                       Post Comment
                     </button>
@@ -244,17 +244,17 @@ const IssueDetails: React.FC<IssueDetailsProps> = ({ issue, onClose }) => {
             </div>
 
             {/* Management Sidebar */}
-            <div className="w-80 bg-gray-50 border-l border-gray-200 p-6">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Issue Management</h3>
+            <div className="w-80 bg-gradient-to-b from-gray-50 to-gray-100/50 border-l border-gray-200/50 p-6">
+              <h3 className="text-lg font-bold text-gray-900 mb-6">Issue Management</h3>
               
-              <div className="space-y-4">
+              <div className="space-y-5">
                 {/* Status Update */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Status</label>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">Status</label>
                   <select
                     value={status}
                     onChange={(e) => setStatus(e.target.value as typeof status)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white transition-all duration-200"
                   >
                     <option value="new">New</option>
                     <option value="assigned">Assigned</option>
@@ -265,11 +265,11 @@ const IssueDetails: React.FC<IssueDetailsProps> = ({ issue, onClose }) => {
 
                 {/* Assignment */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Assigned To</label>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">Assigned To</label>
                   <select
                     value={assignedTo}
                     onChange={(e) => setAssignedTo(e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white transition-all duration-200"
                   >
                     <option value="">Unassigned</option>
                     <option value="Mike Wilson">Mike Wilson</option>
@@ -281,20 +281,20 @@ const IssueDetails: React.FC<IssueDetailsProps> = ({ issue, onClose }) => {
 
                 {/* Estimated Completion */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Estimated Completion</label>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">Estimated Completion</label>
                   <input
                     type="datetime-local"
                     defaultValue={issue.estimatedCompletion?.slice(0, 16)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white transition-all duration-200"
                   />
                 </div>
 
                 {/* Priority Override */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Priority</label>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">Priority</label>
                   <select
                     defaultValue={issue.priority}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white transition-all duration-200"
                   >
                     <option value="urgent">Urgent</option>
                     <option value="high">High</option>
@@ -304,18 +304,18 @@ const IssueDetails: React.FC<IssueDetailsProps> = ({ issue, onClose }) => {
                 </div>
 
                 {/* Action Buttons */}
-                <div className="pt-4 space-y-3">
-                  <button className="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 flex items-center justify-center">
+                <div className="pt-6 space-y-3">
+                  <button className="w-full px-4 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl hover:from-blue-700 hover:to-indigo-700 flex items-center justify-center font-medium shadow-sm transition-all duration-200">
                     <Edit3 className="h-4 w-4 mr-2" />
                     Update Issue
                   </button>
                   
-                  <button className="w-full px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 flex items-center justify-center">
+                  <button className="w-full px-4 py-3 bg-gradient-to-r from-green-600 to-green-700 text-white rounded-xl hover:from-green-700 hover:to-green-800 flex items-center justify-center font-medium shadow-sm transition-all duration-200">
                     <CheckCircle className="h-4 w-4 mr-2" />
                     Mark as Resolved
                   </button>
                   
-                  <button className="w-full px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 flex items-center justify-center">
+                  <button className="w-full px-4 py-3 border border-gray-200 text-gray-700 rounded-xl hover:bg-white hover:border-gray-300 flex items-center justify-center font-medium transition-all duration-200">
                     <Calendar className="h-4 w-4 mr-2" />
                     Schedule Follow-up
                   </button>
@@ -323,13 +323,13 @@ const IssueDetails: React.FC<IssueDetailsProps> = ({ issue, onClose }) => {
 
                 {/* Estimated Completion Display */}
                 {issue.estimatedCompletion && (
-                  <div className="pt-4 border-t border-gray-200">
+                  <div className="pt-5 border-t border-gray-200">
                     <div className="text-sm text-gray-600">
                       <div className="flex items-center space-x-2 mb-1">
                         <Clock className="h-4 w-4" />
-                        <span className="font-medium">Estimated Completion:</span>
+                        <span className="font-semibold">Estimated Completion:</span>
                       </div>
-                      <span className="text-gray-900">{formatDate(issue.estimatedCompletion)}</span>
+                      <span className="text-gray-900 font-medium">{formatDate(issue.estimatedCompletion)}</span>
                     </div>
                   </div>
                 )}
