@@ -1,19 +1,29 @@
 import React, { useState } from 'react';
 import { 
   MapPin, 
+  Filter, 
   Search, 
   Bell, 
   User, 
+  BarChart3, 
+  Settings,
   Menu,
-  Plus,
-  Filter
+  X,
+  ChevronDown,
+  AlertTriangle,
+  Clock,
+  CheckCircle,
+  Circle,
+  Camera,
+  MessageSquare,
+  Users,
+  TrendingUp
 } from 'lucide-react';
 import Sidebar from './components/Sidebar';
 import MapView from './components/MapView';
 import IssuesList from './components/IssuesList';
 import Analytics from './components/Analytics';
 import IssueDetails from './components/IssueDetails';
-import StatsCards from './components/StatsCards';
 
 type Issue = {
   id: string;
@@ -133,7 +143,7 @@ function App() {
   };
 
   return (
-    <div className="flex h-screen bg-gradient-to-br from-gray-50 to-gray-100">
+    <div className="flex h-screen bg-gray-50">
       {/* Sidebar */}
       <Sidebar 
         currentView={currentView}
@@ -146,24 +156,24 @@ function App() {
       {/* Main Content */}
       <div className="flex-1 flex flex-col lg:ml-64">
         {/* Header */}
-        <header className="bg-white/80 backdrop-blur-sm border-b border-gray-200/50 px-4 py-4 shadow-sm">
+        <header className="bg-white border-b border-gray-200 px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
               <button
                 onClick={() => setSidebarOpen(true)}
-                className="lg:hidden p-2 rounded-xl text-gray-500 hover:text-gray-700 hover:bg-gray-100/80 transition-all duration-200"
+                className="lg:hidden p-2 rounded-md text-gray-500 hover:text-gray-700 hover:bg-gray-100"
               >
                 <Menu className="h-5 w-5" />
               </button>
               <div>
                 <div className="flex items-center space-x-3 mb-1">
-                  <h1 className="text-2xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
+                  <h1 className="text-2xl font-bold text-gray-900">
                     {currentView === 'dashboard' && 'Dashboard'}
                     {currentView === 'issues' && 'Issues Management'}
                     {currentView === 'analytics' && 'Analytics'}
                   </h1>
-                  <div className="hidden sm:flex items-center space-x-2 px-3 py-1.5 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-full border border-blue-100">
-                    <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse shadow-sm"></div>
+                  <div className="hidden sm:flex items-center space-x-2 px-3 py-1 bg-blue-50 rounded-full">
+                    <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
                     <span className="text-sm text-blue-700 font-medium">Welcome back, Admin</span>
                   </div>
                 </div>
@@ -176,24 +186,17 @@ function App() {
             </div>
             <div className="flex items-center space-x-4">
               {/* Mobile Welcome Message */}
-              <div className="sm:hidden flex items-center space-x-2 px-2 py-1 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-full border border-blue-100">
+              <div className="sm:hidden flex items-center space-x-2 px-2 py-1 bg-blue-50 rounded-full">
                 <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
                 <span className="text-xs text-blue-700 font-medium">Admin</span>
               </div>
-              
-              {/* Add New Issue Button */}
-              <button className="hidden sm:flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl hover:from-blue-700 hover:to-indigo-700 transition-all duration-200 shadow-sm hover:shadow-md">
-                <Plus className="h-4 w-4" />
-                <span className="text-sm font-medium">New Issue</span>
-              </button>
-              
-              <button className="relative p-2.5 text-gray-500 hover:text-gray-700 hover:bg-gray-100/80 rounded-xl transition-all duration-200">
+              <button className="relative p-2 text-gray-500 hover:text-gray-700">
                 <Bell className="h-5 w-5" />
-                <span className="absolute -top-1 -right-1 h-4 w-4 bg-gradient-to-r from-red-500 to-red-600 text-white rounded-full text-xs flex items-center justify-center shadow-sm">
+                <span className="absolute -top-1 -right-1 h-4 w-4 bg-red-500 text-white rounded-full text-xs flex items-center justify-center">
                   3
                 </span>
               </button>
-              <button className="flex items-center space-x-2 p-2.5 rounded-xl text-gray-700 hover:bg-gray-100/80 transition-all duration-200">
+              <button className="flex items-center space-x-2 p-2 rounded-lg text-gray-700 hover:bg-gray-100">
                 <User className="h-5 w-5" />
                 <span className="hidden sm:block">Admin User</span>
               </button>
@@ -204,98 +207,70 @@ function App() {
         {/* Content Area */}
         <main className="flex-1 overflow-hidden">
           {currentView === 'dashboard' && (
-            <div className="h-full flex flex-col">
-              {/* Stats Cards */}
-              <div className="p-6 pb-0">
-                <StatsCards stats={stats} />
+            <div className="h-full flex">
+              {/* Map Section */}
+              <div className="flex-1 relative">
+                <MapView 
+                  issues={filteredIssues} 
+                  onIssueSelect={setSelectedIssue}
+                />
               </div>
               
-              <div className="flex-1 flex p-6 pt-4 space-x-6">
-                {/* Map Section */}
-                <div className="flex-1 relative bg-white rounded-2xl shadow-sm border border-gray-200/50 overflow-hidden">
-                  <MapView 
-                    issues={filteredIssues} 
-                    onIssueSelect={setSelectedIssue}
-                  />
-                </div>
-                
-                {/* Issues Sidebar */}
-                <div className="w-96 bg-white rounded-2xl shadow-sm border border-gray-200/50 flex flex-col overflow-hidden">
-                  {/* Search and Filters */}
-                  <div className="p-6 border-b border-gray-100">
-                    <div className="relative mb-4">
-                      <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
-                      <input
-                        type="text"
-                        placeholder="Search issues..."
-                        value={searchQuery}
-                        onChange={(e) => setSearchQuery(e.target.value)}
-                        className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-gray-50/50 transition-all duration-200"
-                      />
-                    </div>
-                    
-                    <div className="flex items-center space-x-2 mb-3">
-                      <Filter className="h-4 w-4 text-gray-500" />
-                      <span className="text-sm font-medium text-gray-700">Filters</span>
-                    </div>
-                    
-                    <div className="grid grid-cols-1 gap-3">
-                      <select
-                        value={selectedCategory}
-                        onChange={(e) => setSelectedCategory(e.target.value)}
-                        className="px-3 py-2.5 border border-gray-200 rounded-xl text-sm bg-gray-50/50 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
-                      >
-                        <option value="all">All Categories</option>
-                        <option value="pothole">Potholes</option>
-                        <option value="streetlight">Street Lights</option>
-                        <option value="trash">Trash/Recycling</option>
-                        <option value="graffiti">Graffiti</option>
-                        <option value="other">Other</option>
-                      </select>
-                      
-                      <div className="grid grid-cols-2 gap-2">
-                        <select
-                          value={selectedStatus}
-                          onChange={(e) => setSelectedStatus(e.target.value)}
-                          className="px-3 py-2.5 border border-gray-200 rounded-xl text-sm bg-gray-50/50 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
-                        >
-                          <option value="all">All Status</option>
-                          <option value="new">New</option>
-                          <option value="assigned">Assigned</option>
-                          <option value="in-progress">In Progress</option>
-                          <option value="resolved">Resolved</option>
-                        </select>
-                        
-                        <select
-                          value={selectedPriority}
-                          onChange={(e) => setSelectedPriority(e.target.value)}
-                          className="px-3 py-2.5 border border-gray-200 rounded-xl text-sm bg-gray-50/50 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
-                        >
-                          <option value="all">All Priority</option>
-                          <option value="urgent">Urgent</option>
-                          <option value="high">High</option>
-                          <option value="medium">Medium</option>
-                          <option value="low">Low</option>
-                        </select>
-                      </div>
-                    </div>
+              {/* Issues Sidebar */}
+              <div className="w-96 bg-white border-l border-gray-200 flex flex-col">
+                {/* Search and Filters */}
+                <div className="p-4 border-b border-gray-200">
+                  <div className="relative mb-4">
+                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+                    <input
+                      type="text"
+                      placeholder="Search issues..."
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                      className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    />
                   </div>
-
-                  {/* Issues List */}
-                  <IssuesList 
-                    issues={filteredIssues}
-                    onIssueSelect={setSelectedIssue}
-                    selectedIssue={selectedIssue}
-                  />
-                </div>
+                  
+                  <div className="grid grid-cols-2 gap-2">
+                    <select
+                      value={selectedCategory}
+                      onChange={(e) => setSelectedCategory(e.target.value)}
+                      className="px-3 py-2 border border-gray-300 rounded-lg text-sm"
+                    >
+                      <option value="all">All Categories</option>
+                      <option value="pothole">Potholes</option>
+                      <option value="streetlight">Street Lights</option>
+                      <option value="trash">Trash/Recycling</option>
+                      <option value="graffiti">Graffiti</option>
+                      <option value="other">Other</option>
+                    </select>
+                    
+                    <select
+                      value={selectedStatus}
+                      onChange={(e) => setSelectedStatus(e.target.value)}
+                      className="px-3 py-2 border border-gray-300 rounded-lg text-sm"
+                    >
+                      <option value="all">All Status</option>
+                      <option value="new">New</option>
+                      <option value="assigned">Assigned</option>
+                      <option value="in-progress">In Progress</option>
+                      <option value="resolved">Resolved</option>
+                    </select>
                   </div>
+                </div>
 
+                {/* Issues List */}
+                <IssuesList 
+                  issues={filteredIssues}
+                  onIssueSelect={setSelectedIssue}
+                  selectedIssue={selectedIssue}
+                />
+              </div>
             </div>
           )}
 
           {currentView === 'issues' && (
-            <div className="p-6 space-y-6">
-              <StatsCards stats={stats} />
+            <div className="p-6">
               <IssuesList 
                 issues={filteredIssues}
                 onIssueSelect={setSelectedIssue}
@@ -306,8 +281,7 @@ function App() {
           )}
 
           {currentView === 'analytics' && (
-            <div className="p-6 space-y-6">
-              <StatsCards stats={stats} />
+            <div className="p-6">
               <Analytics issues={mockIssues} />
             </div>
           )}
