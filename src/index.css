@@ -48,3 +48,21 @@
   background-color: #f9fafb !important;
   color: #111827 !important;
 }
+
+/* Fix z-index issues with map overlays */
+.leaflet-top,
+.leaflet-bottom {
+  z-index: 1500 !important;
+}
+
+.leaflet-control {
+  z-index: 1500 !important;
+}
+
+.leaflet-popup-pane {
+  z-index: 1600 !important;
+}
+
+.leaflet-marker-pane {
+  z-index: 1400 !important;
+}

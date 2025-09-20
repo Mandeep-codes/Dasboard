@@ -177,7 +177,7 @@ const MapView: React.FC<MapViewProps> = ({ issues, onIssueSelect }) => {
   return (
     <div className="relative h-full">
       {/* Map Controls */}
-      <div className="absolute top-4 right-4 z-[1000] space-y-2">
+      <div className="absolute top-4 right-4 z-[2000] space-y-2">
         <div className="bg-white rounded-lg shadow-lg border border-gray-200 p-2">
           <button
             onClick={handleLocateUser}
@@ -190,7 +190,7 @@ const MapView: React.FC<MapViewProps> = ({ issues, onIssueSelect }) => {
       </div>
 
       {/* Legend */}
-      <div className="absolute bottom-4 left-4 z-[1000] bg-white rounded-lg shadow-lg border border-gray-200 p-4">
+      <div className="absolute bottom-4 left-4 z-[2000] bg-white rounded-lg shadow-lg border border-gray-200 p-4 max-w-xs">
         <h4 className="text-sm font-semibold text-gray-900 mb-3">Issue Priority</h4>
         <div className="space-y-2 text-xs">
           <div className="flex items-center space-x-2">
@@ -233,7 +233,7 @@ const MapView: React.FC<MapViewProps> = ({ issues, onIssueSelect }) => {
       </div>
 
       {/* Issue Count Badge */}
-      <div className="absolute top-4 left-4 z-[1000] bg-white rounded-lg shadow-lg border border-gray-200 px-4 py-2">
+      <div className="absolute top-4 left-4 z-[2000] bg-white rounded-lg shadow-lg border border-gray-200 px-4 py-2 max-w-xs">
         <div className="text-sm font-semibold text-gray-900">
           {issues.length} Active Issues
         </div>
@@ -247,7 +247,7 @@ const MapView: React.FC<MapViewProps> = ({ issues, onIssueSelect }) => {
         center={mapCenter}
         zoom={8}
         style={{ height: '100%', width: '100%' }}
-        className="z-0"
+        className="z-10"
       >
         <LocationUpdater center={mapCenter} />
         
