@@ -50,7 +50,7 @@ const mockIssues: Issue[] = [
     category: 'pothole',
     priority: 'urgent',
     status: 'new',
-    location: { lat: 28.6139, lng: 77.2090, address: 'Connaught Place, New Delhi, Delhi 110001' },
+    location: { lat: 23.6102, lng: 85.2799, address: 'Main Road, Ranchi, Jharkhand 834001' },
     department: 'Public Works',
     submittedBy: 'John Smith',
     submittedAt: '2025-01-13T08:30:00Z',
@@ -63,7 +63,7 @@ const mockIssues: Issue[] = [
     category: 'streetlight',
     priority: 'high',
     status: 'assigned',
-    location: { lat: 19.0760, lng: 72.8777, address: 'Marine Drive, Mumbai, Maharashtra 400020' },
+    location: { lat: 23.3441, lng: 85.3096, address: 'Station Road, Ranchi, Jharkhand 834001' },
     department: 'Electrical',
     submittedBy: 'Mary Johnson',
     submittedAt: '2025-01-12T14:15:00Z',
@@ -78,7 +78,7 @@ const mockIssues: Issue[] = [
     category: 'trash',
     priority: 'medium',
     status: 'in-progress',
-    location: { lat: 13.0827, lng: 80.2707, address: 'Marina Beach, Chennai, Tamil Nadu 600013' },
+    location: { lat: 24.7914, lng: 85.0002, address: 'Jubilee Park, Jamshedpur, Jharkhand 831001' },
     department: 'Sanitation',
     submittedBy: 'Robert Davis',
     submittedAt: '2025-01-11T10:45:00Z',
@@ -92,7 +92,7 @@ const mockIssues: Issue[] = [
     category: 'other',
     priority: 'high',
     status: 'new',
-    location: { lat: 12.9716, lng: 77.5946, address: 'MG Road, Bangalore, Karnataka 560001' },
+    location: { lat: 22.8046, lng: 86.2029, address: 'Bistupur Main Road, Jamshedpur, Jharkhand 831001' },
     department: 'Public Works',
     submittedBy: 'Priya Sharma',
     submittedAt: '2025-01-13T11:20:00Z',
@@ -105,7 +105,7 @@ const mockIssues: Issue[] = [
     category: 'other',
     priority: 'urgent',
     status: 'assigned',
-    location: { lat: 22.5726, lng: 88.3639, address: 'Park Street, Kolkata, West Bengal 700016' },
+    location: { lat: 23.7957, lng: 86.4304, address: 'City Center, Dhanbad, Jharkhand 826001' },
     department: 'Water Management',
     submittedBy: 'Amit Kumar',
     submittedAt: '2025-01-12T16:45:00Z',
@@ -143,7 +143,7 @@ function App() {
   };
 
   return (
-    <div className="flex h-screen bg-gray-50">
+    <div className="flex h-screen bg-gray-50 overflow-hidden">
       {/* Sidebar */}
       <Sidebar 
         currentView={currentView}
@@ -154,41 +154,75 @@ function App() {
       />
 
       {/* Main Content */}
-      <div className="flex-1 flex flex-col lg:ml-64">
+      <div className="flex-1 flex flex-col lg:ml-0">
         {/* Header */}
-        <header className="bg-white border-b border-gray-200 px-4 py-4">
+        <header className="bg-white border-b border-gray-200 px-4 py-3 flex-shrink-0">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
               <button
                 onClick={() => setSidebarOpen(true)}
-                className="lg:hidden p-2 rounded-md text-gray-500 hover:text-gray-700 hover:bg-gray-100"
+                className="p-2 rounded-md text-gray-500 hover:text-gray-700 hover:bg-gray-100"
               >
                 <Menu className="h-5 w-5" />
               </button>
-              <div>
-                <div className="flex items-center space-x-3 mb-1">
-                  <h1 className="text-2xl font-bold text-gray-900">
-                    {currentView === 'dashboard' && 'Dashboard'}
-                    {currentView === 'issues' && 'Issues Management'}
-                    {currentView === 'analytics' && 'Analytics'}
-                  </h1>
-                  <div className="hidden sm:flex items-center space-x-2 px-3 py-1 bg-blue-50 rounded-full">
-                    <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                    <span className="text-sm text-blue-700 font-medium">Welcome back, Admin</span>
-                  </div>
-                </div>
-                <p className="text-sm text-gray-600">
+              
+              {/* Horizontal Navigation */}
+              <div className="flex items-center space-x-1 overflow-x-auto scrollbar-hide">
+                <button
+                  onClick={() => setCurrentView('dashboard')}
+                  className={`flex items-center space-x-2 px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-colors ${
+                    currentView === 'dashboard' 
+                      ? 'bg-blue-100 text-blue-700' 
+                      : 'text-gray-600 hover:bg-gray-100'
+                  }`}
+                >
+                  <MapPin className="h-4 w-4" />
+                  <span>Dashboard</span>
+                </button>
+                <button
+                  onClick={() => setCurrentView('issues')}
+                  className={`flex items-center space-x-2 px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-colors ${
+                    currentView === 'issues' 
+                      ? 'bg-blue-100 text-blue-700' 
+                      : 'text-gray-600 hover:bg-gray-100'
+                  }`}
+                >
+                  <FileText className="h-4 w-4" />
+                  <span>Issues</span>
+                </button>
+                <button
+                  onClick={() => setCurrentView('analytics')}
+                  className={`flex items-center space-x-2 px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-colors ${
+                    currentView === 'analytics' 
+                      ? 'bg-blue-100 text-blue-700' 
+                      : 'text-gray-600 hover:bg-gray-100'
+                  }`}
+                >
+                  <BarChart3 className="h-4 w-4" />
+                  <span>Analytics</span>
+                </button>
+              </div>
+              
+              {/* Title and Description */}
+              <div className="hidden md:block border-l border-gray-200 pl-4">
+                <h1 className="text-lg font-semibold text-gray-900">
+                  {currentView === 'dashboard' && 'Dashboard'}
+                  {currentView === 'issues' && 'Issues Management'}
+                  {currentView === 'analytics' && 'Analytics'}
+                </h1>
+                <p className="text-xs text-gray-500">
                   {currentView === 'dashboard' && 'Real-time overview of civic issues'}
                   {currentView === 'issues' && 'Manage and track all reported issues'}
                   {currentView === 'analytics' && 'Performance insights and trends'}
                 </p>
               </div>
             </div>
+            
             <div className="flex items-center space-x-4">
-              {/* Mobile Welcome Message */}
-              <div className="sm:hidden flex items-center space-x-2 px-2 py-1 bg-blue-50 rounded-full">
+              {/* Welcome Message */}
+              <div className="hidden sm:flex items-center space-x-2 px-3 py-1 bg-blue-50 rounded-full">
                 <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                <span className="text-xs text-blue-700 font-medium">Admin</span>
+                <span className="text-sm text-blue-700 font-medium">Welcome back, Admin</span>
               </div>
               <button className="relative p-2 text-gray-500 hover:text-gray-700">
                 <Bell className="h-5 w-5" />
@@ -205,7 +239,7 @@ function App() {
         </header>
 
         {/* Content Area */}
-        <main className="flex-1 overflow-hidden">
+        <main className="flex-1 overflow-hidden bg-white">
           {currentView === 'dashboard' && (
             <div className="h-full flex">
               {/* Map Section */}
@@ -217,7 +251,7 @@ function App() {
               </div>
               
               {/* Issues Sidebar */}
-              <div className="w-96 bg-white border-l border-gray-200 flex flex-col">
+              <div className="w-80 bg-gray-50 border-l border-gray-200 flex flex-col">
                 {/* Search and Filters */}
                 <div className="p-4 border-b border-gray-200">
                   <div className="relative mb-4">

@@ -134,7 +134,7 @@ const LocationUpdater: React.FC<{ center: [number, number] }> = ({ center }) => 
 
 const MapView: React.FC<MapViewProps> = ({ issues, onIssueSelect }) => {
   const [userLocation, setUserLocation] = useState<[number, number] | null>(null);
-  const [mapCenter, setMapCenter] = useState<[number, number]>([20.5937, 78.9629]); // Center of India
+  const [mapCenter, setMapCenter] = useState<[number, number]>([23.6102, 85.2799]); // Center of Jharkhand (Ranchi)
 
   // Get user's current location
   useEffect(() => {
@@ -150,7 +150,7 @@ const MapView: React.FC<MapViewProps> = ({ issues, onIssueSelect }) => {
         },
         (error) => {
           console.log('Location access denied or unavailable:', error);
-          // Keep default India center
+          // Keep default Jharkhand center
         }
       );
     }
@@ -245,20 +245,20 @@ const MapView: React.FC<MapViewProps> = ({ issues, onIssueSelect }) => {
       {/* Map Container */}
       <MapContainer
         center={mapCenter}
-        zoom={6}
+        zoom={8}
         style={{ height: '100%', width: '100%' }}
         className="z-0"
       >
         <LocationUpdater center={mapCenter} />
         
-        {/* Indian Map Tiles with better coverage */}
+        {/* Map Tiles */}
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           maxZoom={19}
         />
         
-        {/* Alternative tile layer for better India coverage */}
+        {/* Alternative tile layer for better coverage */}
         <TileLayer
           attribution='&copy; <a href="https://carto.com/attributions">CARTO</a>'
           url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"

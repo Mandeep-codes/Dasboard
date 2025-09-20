@@ -49,7 +49,7 @@ const Sidebar: React.FC<SidebarProps> = ({
 
       {/* Sidebar */}
       <div className={`
-        fixed top-0 left-0 z-50 h-full w-64 bg-white border-r border-gray-200 transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-0
+        fixed top-0 left-0 z-50 h-full w-64 bg-white border-r border-gray-200 transform transition-transform duration-300 ease-in-out
         ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}
       `}>
         <div className="flex flex-col h-full">
@@ -66,7 +66,7 @@ const Sidebar: React.FC<SidebarProps> = ({
             </div>
             <button
               onClick={() => setSidebarOpen(false)}
-              className="lg:hidden p-1 rounded-md text-gray-500 hover:text-gray-700"
+              className="p-1 rounded-md text-gray-500 hover:text-gray-700"
             >
               <X className="h-5 w-5" />
             </button>
@@ -107,41 +107,20 @@ const Sidebar: React.FC<SidebarProps> = ({
             </div>
           </div>
 
-          {/* Navigation */}
-          <nav className="flex-1 p-4">
-            <div className="space-y-1">
-              {navigation.map((item) => {
-                const Icon = item.icon;
-                return (
-                  <button
-                    key={item.id}
-                    onClick={() => {
-                      setCurrentView(item.id);
-                      setSidebarOpen(false);
-                    }}
-                    className={`
-                      w-full flex items-center px-3 py-2 text-sm font-medium rounded-lg transition-colors
-                      ${currentView === item.id
-                        ? 'bg-blue-50 text-blue-700 border-r-2 border-blue-700'
-                        : 'text-gray-700 hover:bg-gray-50'
-                      }
-                    `}
-                  >
-                    <Icon className={`
-                      mr-3 h-5 w-5
-                      ${currentView === item.id ? 'text-blue-700' : 'text-gray-400'}
-                    `} />
-                    {item.name}
-                  </button>
-                );
-              })}
+          {/* Additional Info */}
+          <div className="flex-1 p-4">
+            <div className="bg-blue-50 rounded-lg p-4">
+              <h4 className="text-sm font-medium text-blue-900 mb-2">Jharkhand Region</h4>
+              <p className="text-xs text-blue-700">
+                Covering major cities including Ranchi, Jamshedpur, and Dhanbad
+              </p>
             </div>
-          </nav>
+          </div>
 
           {/* Footer */}
           <div className="p-4 border-t border-gray-200">
             <p className="text-xs text-gray-500 text-center">
-              © 2025 City Government
+              © 2025 Jharkhand Government
             </p>
           </div>
         </div>
