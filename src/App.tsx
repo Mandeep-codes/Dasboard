@@ -17,7 +17,8 @@ import {
   Camera,
   MessageSquare,
   Users,
-  TrendingUp
+  TrendingUp,
+  FileText
 } from 'lucide-react';
 import Sidebar from './components/Sidebar';
 import MapView from './components/MapView';
