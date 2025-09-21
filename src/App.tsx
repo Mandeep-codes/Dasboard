@@ -79,12 +79,12 @@ const mockIssues: Issue[] = [
     category: 'trash',
     priority: 'medium',
     status: 'in-progress',
-    location: { lat: 24.7914, lng: 85.0002, address: 'Jubilee Park, Jamshedpur, Jharkhand 831001' },
+    location: { lat: 24.7914, lng: 85.0002, address: 'Community Park, Ashok Nagar, Ranchi 831001' },
     department: 'Sanitation',
     submittedBy: 'Robert Davis',
     submittedAt: '2025-01-11T10:45:00Z',
     assignedTo: 'Sarah Brown',
-    photos: ['https://images.pexels.com/photos/1105766/pexels-photo-1105766.jpeg']
+    photos: ['https://preview.redd.it/i-volunteer-on-the-weekends-to-beautify-the-san-francisco-v0-vkxhlo8lyice1.jpg?width=1080&crop=smart&auto=webp&s=8aea0399d2ada667a6d0434a7f27c315e3e7dab5']
   },
   {
     id: '4',
