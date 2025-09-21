@@ -190,7 +190,7 @@ const MapView: React.FC<MapViewProps> = ({ issues, onIssueSelect }) => {
       </div>
 
       {/* Legend */}
-      <div className="absolute bottom-4 left-4 z-[2000] bg-white rounded-lg shadow-lg border border-gray-200 p-4 max-w-xs">
+      <div className="absolute bottom-4 left-4 z-[2000] bg-white rounded-lg shadow-lg border border-gray-200 p-4 max-w-xs w-72">
         <h4 className="text-sm font-semibold text-gray-900 mb-3">Issue Priority</h4>
         <div className="space-y-2 text-xs">
           <div className="flex items-center space-x-2">
@@ -242,6 +242,100 @@ const MapView: React.FC<MapViewProps> = ({ issues, onIssueSelect }) => {
         </div>
       </div>
 
+      {/* Report Generator */}
+      <div className="absolute top-20 left-4 z-[2000] bg-white rounded-lg shadow-lg border border-gray-200 p-4 max-w-xs w-72">
+        <h4 className="text-sm font-semibold text-gray-900 mb-4 flex items-center">
+          <div className="w-2 h-2 bg-blue-500 rounded-full mr-2"></div>
+          Report Generator
+        </h4>
+        
+        <div className="space-y-3">
+          {/* Department Selection */}
+          <div>
+            <label className="block text-xs font-medium text-gray-700 mb-1">
+              Department
+            </label>
+            <select className="w-full px-2 py-1.5 text-xs border border-gray-300 rounded-md focus:ring-1 focus:ring-blue-500 focus:border-blue-500">
+              <option value="">Select Department</option>
+              <option value="road-infrastructure">Road & Infrastructure</option>
+              <option value="water-supply">Water Supply</option>
+              <option value="garbage-waste">Garbage & Waste</option>
+              <option value="drainage-sewage">Drainage & Sewage</option>
+              <option value="electricity-streetlights">Electricity & Streetlights</option>
+              <option value="public-nuisance">Public Nuisance</option>
+            </select>
+          </div>
+
+          {/* Time Frame Selection */}
+          <div>
+            <label className="block text-xs font-medium text-gray-700 mb-1">
+              Time Frame
+            </label>
+            <select className="w-full px-2 py-1.5 text-xs border border-gray-300 rounded-md focus:ring-1 focus:ring-blue-500 focus:border-blue-500">
+              <option value="1-day">One Day</option>
+              <option value="1-week">One Week</option>
+              <option value="1-month" selected>One Month</option>
+              <option value="6-months">Six Months</option>
+              <option value="1-year">One Year</option>
+            </select>
+          </div>
+
+          {/* Employees Involved */}
+          <div>
+            <label className="block text-xs font-medium text-gray-700 mb-2">
+              Employees Involved
+            </label>
+            <div className="max-h-20 overflow-y-auto border border-gray-300 rounded-md p-2 space-y-1">
+              <label className="flex items-center text-xs">
+                <input type="checkbox" className="mr-2 h-3 w-3 text-blue-600 rounded" />
+                <span>Mike Wilson</span>
+              </label>
+              <label className="flex items-center text-xs">
+                <input type="checkbox" className="mr-2 h-3 w-3 text-blue-600 rounded" />
+                <span>Sarah Brown</span>
+              </label>
+              <label className="flex items-center text-xs">
+                <input type="checkbox" className="mr-2 h-3 w-3 text-blue-600 rounded" />
+                <span>John Davis</span>
+              </label>
+              <label className="flex items-center text-xs">
+                <input type="checkbox" className="mr-2 h-3 w-3 text-blue-600 rounded" />
+                <span>Lisa Johnson</span>
+              </label>
+              <label className="flex items-center text-xs">
+                <input type="checkbox" className="mr-2 h-3 w-3 text-blue-600 rounded" />
+                <span>Rajesh Gupta</span>
+              </label>
+              <label className="flex items-center text-xs">
+                <input type="checkbox" className="mr-2 h-3 w-3 text-blue-600 rounded" />
+                <span>Arpin Bala</span>
+              </label>
+            </div>
+          </div>
+
+          {/* Pin Code */}
+          <div>
+            <label className="block text-xs font-medium text-gray-700 mb-1">
+              Pin Code
+            </label>
+            <input
+              type="number"
+              placeholder="Enter pin code"
+              className="w-full px-2 py-1.5 text-xs border border-gray-300 rounded-md focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+              min="100000"
+              max="999999"
+            />
+          </div>
+
+          {/* Generate Button */}
+          <button className="w-full bg-blue-600 hover:bg-blue-700 text-white text-xs font-medium py-2 px-3 rounded-md transition-colors duration-200 flex items-center justify-center space-x-1">
+            <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+            <span>Summarize</span>
+          </button>
+        </div>
+      </div>
       {/* Map Container */}
       <MapContainer
         center={mapCenter}
