@@ -74,7 +74,7 @@ const mockIssues: Issue[] = [
   },
   {
     id: '3',
-    title: 'Overflowing trash bin',
+    title: 'Trash Dumping outside Park',
     description: 'Trash bin at park entrance is overflowing, attracting pests.',
     category: 'trash',
     priority: 'medium',
