@@ -83,7 +83,7 @@ const mockIssues: Issue[] = [
     department: 'Sanitation',
     submittedBy: 'Rahul Kumar',
     submittedAt: '2025-01-11T10:45:00Z',
-    assignedTo: 'Sarah Brown',
+    assignedTo: 'Arpit Bala',
     photos: ['https://preview.redd.it/i-volunteer-on-the-weekends-to-beautify-the-san-francisco-v0-vkxhlo8lyice1.jpg?width=1080&crop=smart&auto=webp&s=8aea0399d2ada667a6d0434a7f27c315e3e7dab5']
   },
   {
